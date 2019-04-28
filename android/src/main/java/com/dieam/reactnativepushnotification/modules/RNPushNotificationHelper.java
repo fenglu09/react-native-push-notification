@@ -164,6 +164,13 @@ public class RNPushNotificationHelper {
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(bundle.getBoolean("autoCancel", true));
 
+            /**  add by david at 2019-04-28 start */
+            // 解决Android 8.0 的Notification不显示
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notification.setChannelId(context.getPackageName());
+            }
+            /**  add by david at 2019-04-28 end */
+
             String group = bundle.getString("group");
             if (group != null) {
                 notification.setGroup(group);
